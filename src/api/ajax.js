@@ -35,3 +35,10 @@ export default function ajax(url, data={}, type='GET'){
         })
     })
 }
+/**
+ * const response = await ajax()
+ * const result = reponse.data
+ * 
+ * 而现在是直接
+ * const result = await ajax() 通过外面在套一层promise对象，从而返还的是response.data而不再是response
+ */
