@@ -1,10 +1,11 @@
 <template>
-  <div>MSite</div>
+  <div>MSite
+    <h1>hello</h1>
+  </div>
 </template>
 
 <script>
 export default {
-    name:'MSite'
 
 }
 </script>
