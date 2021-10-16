@@ -1,15 +1,15 @@
 <template>
-  <div>
-      123
-  </div>
+  
 </template>
 
 <script>
 export default {
+    name:'FooterGuide'
 
 }
 </script>
 
-<style lang='stylus' rel='stylesheet/stylus'>
+
+<style lang="stylus" ref="stylesheet/stylus">
     
 </style>
