@@ -3,7 +3,8 @@
     <section class="profile">
       <HeaderTop title="My Profile"></HeaderTop>
       <section class="profile-number">
-        <a href="javascript:" class="profile-link">
+
+        <router-link to='/login' class="profile-link">
           <div class="profile_image">
             <i class="iconfont icon-person"></i>
           </div>
@@ -19,7 +20,8 @@
           <span class="arrow">
             <i class="iconfont icon-jiantou1"></i>
           </span>
-        </a>
+        </router-link>
+
       </section>
       <section class="profile_info_data border-1px">
         <ul class="info_data_list">
@@ -68,7 +70,7 @@
             <i class="iconfont icon-vip"></i>
           </span>
           <div class="my_order_div">
-            <span>硅谷外卖会员卡</span>
+            <span>Ls7外卖会员卡</span>
             <span class="my_order_icon">
               <i class="iconfont icon-jiantou1"></i>
             </span>
@@ -104,6 +106,7 @@ export default {
 <style lang="stylus" ref="stylesheet/stylus">
 @import '../../common/stylus/mixins.styl'
 .profile //我的
+  overflow hidden
   width 100%
   .header
     background-color #02a774

@@ -21,6 +21,7 @@ export default {
 <style lang="stylus" ref="stylesheet/stylus">
 @import '../../common/stylus/mixins.styl'
 .search  //搜索
+  overflow hidden
   width 100%
   .header
     background-color #02a774
