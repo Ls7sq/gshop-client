@@ -6,12 +6,17 @@
 </template>
 
 <script>
+  import {mapActions} from 'vuex' //映射函数
   import FooterGuide from './components/FooterGuide/FooterGuide.vue'
 
   export default {
     components:{FooterGuide},
     async mounted() {
-      this.$store.dispatch('getAddress')
+      //this.$store.dispatch('getAddress')
+      this.getAddress()
+    },
+    methods: {
+      ...mapActions(['getAddress'])
     },
   }
 </script>

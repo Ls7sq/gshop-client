@@ -1,7 +1,7 @@
 <template>
 <section class="msite">
         <!--首页头部-->
-        <HeaderTop title="167D Simei Lane">
+        <HeaderTop :title='address.name'>
           <span class="header_search" slot="left">
             <i class="iconfont icon-sousuo"></i>
           </span>
@@ -130,6 +130,7 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
 import Swiper from 'swiper'
 import 'swiper/dist/css/swiper.min.css'
 
@@ -147,7 +148,10 @@ export default {
       },
     })
   },
-  components:{HeaderTop, ShopList}
+  computed:{
+    ...mapState(['address'])
+  },
+  components:{HeaderTop, ShopList},
 }
 </script>
 
