@@ -53,14 +53,7 @@ export default {
   },
   mounted() {
     this.$store.dispatch('getCategorys')
-    //创建一个Swiper实例对象，来实现轮播
-    new Swiper('.swiper-container',{
-      loop:true,//可以循环轮播
-      // 如果需要分页器
-      pagination: {
-        el: '.swiper-pagination',
-      },
-    })
+    this.$store.dispatch('getShops')
   },
   computed:{
     ...mapState(['address','categorys']),
