@@ -12,8 +12,10 @@
           <form>
             <div :class="{on:loginWay}">
               <section class="login_message">
-                <input type="tel" maxlength="11" placeholder="手机号">
-                <button disabled="disabled" class="get_verification">获取验证码</button>
+                <input type="tel" maxlength="11" placeholder="手机号" v-model="phone">
+                <button disabled="disabled" class="get_verification" :class="{right_phone: rightPhone}">
+                  获取验证码
+                </button>
               </section>
               <section class="login_verification">
                 <input type="tel" maxlength="8" placeholder="验证码">
@@ -59,9 +61,15 @@ export default {
     },
     data() {
       return {
-        loginWay:true //true代表短信登陆，false代表密码登陆后
+        loginWay:true, //true代表短信登陆，false代表密码登陆后
+        phone:'',
       }
     },
+    computed:{
+      rightPhone(){
+        return /^1\d{7}$/.test(this.phone) //正则对象
+      }
+    }
 }
 </script>
 
