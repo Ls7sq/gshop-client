@@ -88,6 +88,34 @@ export default {
       return arr
     }
   },
+  watch:{
+    categorys(value){ //categorys数组中有了数据，在异步更新界面之前便执行了轮播了,因此需要加一个timeout
+      //可实现效果，但不是最优解
+      // setTimeout(()=>{
+      //   //创建一个Swiper实例对象，来实现轮播
+      //   new Swiper('.swiper-container',{
+      //     loop:true,//可以循环轮播
+      //     // 如果需要分页器
+      //     pagination: {
+      //       el: '.swiper-pagination',
+      //     },
+      //   })
+      // },100)
+
+      //界面更新就立即创建Swiper对象
+      this.$nextTick(()=>{
+        //一旦界面更新完成，就立即调用Swiper(此new Swiper语句写在数据更新之后。且界面更新之后)
+        //创建一个Swiper实例对象，来实现轮播
+        new Swiper('.swiper-container',{
+          loop:true,//可以循环轮播
+          // 如果需要分页器
+          pagination: {
+            el: '.swiper-pagination',
+          },
+        })
+      })
+    }
+  },
   components:{HeaderTop, ShopList},
 }
 </script>
