@@ -4,7 +4,8 @@
 import {
     RECEIVE_ADDRESS,
     RECEIVE_CATEGORYS,
-    RECEIVE_SHOPS
+    RECEIVE_SHOPS,
+    RECEIVE_USER_INFO
 } from './mutation-types'
 
 import {
@@ -48,4 +49,10 @@ export default{
             commit(RECEIVE_SHOPS, {shops})
         }
     },
+
+    //由于在登陆时候已经发送过请求，因此手中已经有了user的数据，所以方法用同步。没有的话就必须先去后台获取，再做记录
+    //同步记录用户信息
+    recordUser({commit}, userInfo){
+        commit(RECEIVE_USER_INFO,{userInfo})
+    }
 }
