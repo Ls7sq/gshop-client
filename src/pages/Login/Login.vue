@@ -61,6 +61,7 @@
 
 <script>
 import AlertTip from '../../components/AlertTip/AlertTip.vue'
+import {reqSendCode, reqSmsLogin, reqPwdLogin} from '../../api/index'
 export default {
     mounted() {
         // console.log(this.$router.back)
@@ -90,19 +91,30 @@ export default {
         this.alertText=alertText
       },
       //异步获取短信验证码
-      getCode(){
+      async getCode(){
         //如果当前没有计时
         if(!this.computeTime){
           //启动倒计时
           this.computeTime = 30
-          const intervalId = setInterval(() => {
+          this.intervalId = setInterval(() => {
             this.computeTime--
             if(this.computeTime<=0){
               //停止计时
-              clearInterval(intervalId)
+              clearInterval(this.intervalId)
             }
           }, 1000);
           //发送ajax请求(向指定手机号发送验证码短信)
+          const result = await reqSendCode(this.phone)
+          if(result.code === 1){
+            //显示提示
+            this.showAlert(result.msg)
+            //停止倒计时
+            if(this.computeTime){
+              this.computeTime = 0
+              clearInterval(this.intervalId)
+              
+            }
+          }
         }
       },
       //异步登陆
