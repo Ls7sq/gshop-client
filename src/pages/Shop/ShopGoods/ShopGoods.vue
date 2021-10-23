@@ -63,21 +63,10 @@ export default {
     }
   },
   mounted() {
-    //而整个这65到73是同步的。而异步的代码一定是在同步代码执行完之后才执行.
     this.$store.dispatch('getShopGoods',()=>{//传过去的这个函数是在数据更新后执行
         this.$nextTick(()=>{//列表数据更显显示后执行
-          //列表显示之后创建
-          new BScroll('.menu-wrapper')
-
-          const foodScroll = new BScroll('.foods-wrapper',{
-              probeType:2 //因为惯性滑动不会触发
-          })
-
-          //给右侧列表绑定scroll监听,参数1为事件名，第2个回调函数
-          foodScroll.on('scroll',({x,y})=>{
-            console.log(x,y);
-          })
-
+            this._initScroll()
+            this._initTops()
         })
     });//ajax发送请求，这是异步获取数据
     //列表显示之后创建
@@ -89,9 +78,43 @@ export default {
     //计算得到当前分类的下标
     currentIndex(){
 
-      return
     }
-  }
+  },
+  methods: {//里面放事件回调函数相关的，因此为了区分开，init这两个方法加个_
+    //初始化滚动条
+    _initScroll(){
+      //列表显示之后创建
+      new BScroll('.menu-wrapper')
+
+      const foodScroll = new BScroll('.foods-wrapper',{
+          probeType:2 //2:因为惯性滑动不会触发
+      })
+
+      //给右侧列表绑定scroll监听,参数1为事件名，第2个回调函数
+      foodScroll.on('scroll',({x,y})=>{
+        console.log(x,y);
+        this.scrollY = Math.abs(y)
+      })
+    },
+    _initTops(){
+      //1.初始化tops
+      const tops = []
+      let top = 0
+      tops.push(top)
+      //2.收集
+      //找到所有分类的li
+      //const lis = this.$refs.foodsUl.getElementsByClassName("food-list-hook")
+      const lis = this.$refs.foodsUl.children
+      Array.prototype.slice.call(lis).forEach(li => {
+        top += li.clientHeight
+        tops.push(top)
+      });
+      //3.更新数据
+      this.tops = tops
+
+      console.log(tops)
+    }
+  },
 }
 </script>
 
