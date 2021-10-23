@@ -35,7 +35,7 @@
                     <span class="old" v-if="food.oldPrice">￥{{food.oldPrice}}</span>
                   </div>
                   <div class="cartcontrol-wrapper">
-                    <CartControl :food="food"/>
+                    <!-- <CartControl :food="food"/> -->
                   </div>
                 </div>
               </li>
@@ -43,9 +43,9 @@
           </li>
         </ul>
       </div>
-      <ShopCart />
+      <!-- <ShopCart /> -->
     </div>
-    <Food :food="food" ref="food"/>
+    <!-- <Food :food="food" ref="food"/> -->
   </div>
 </template>
 
@@ -59,12 +59,13 @@ export default {
     return {
       scrollY:0,
       tops:[],
+      // food:{}
     }
   },
   mounted() {
     //而整个这65到73是同步的。而异步的代码一定是在同步代码执行完之后才执行.
     this.$store.dispatch('getShopGoods',()=>{//传过去的这个函数是在数据更新后执行
-        this.$$nextTick(()=>{//列表数据更显显示后执行
+        this.$nextTick(()=>{//列表数据更显显示后执行
           //列表显示之后创建
           new BScroll('.menu-wrapper')
           new BScroll('.foods-wrapper')
