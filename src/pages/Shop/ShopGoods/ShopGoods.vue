@@ -11,7 +11,7 @@
               {{good.name}}
             </span>
           </li>
-        </ul>
+        </ul>·
       </div>
       <div class="foods-wrapper">
         <ul ref="foodsUl">
@@ -50,13 +50,37 @@
 </template>
 
 <script>
+import BScroll from 'better-scroll'
 import {mapState} from 'vuex'
+
+
 export default {
+  data() {
+    return {
+      scrollY:0,
+      tops:[],
+    }
+  },
   mounted() {
-    this.$store.dispatch('getShopGoods');
+    //而整个这65到73是同步的。而异步的代码一定是在同步代码执行完之后才执行.
+    this.$store.dispatch('getShopGoods',()=>{//传过去的这个函数是在数据更新后执行
+        this.$$nextTick(()=>{//列表数据更显显示后执行
+          //列表显示之后创建
+          new BScroll('.menu-wrapper')
+          new BScroll('.foods-wrapper')
+        })
+    });//ajax发送请求，这是异步获取数据
+    //列表显示之后创建
+    // new BScroll('.menu-wrapper')
   },
   computed:{
-    ...mapState(['goods'])
+    ...mapState(['goods']),
+
+    //计算得到当前分类的下标
+    currentIndex(){
+
+      return
+    }
   }
 }
 </script>
