@@ -68,7 +68,16 @@ export default {
         this.$nextTick(()=>{//列表数据更显显示后执行
           //列表显示之后创建
           new BScroll('.menu-wrapper')
-          new BScroll('.foods-wrapper')
+
+          const foodScroll = new BScroll('.foods-wrapper',{
+              probeType:2 //因为惯性滑动不会触发
+          })
+
+          //给右侧列表绑定scroll监听,参数1为事件名，第2个回调函数
+          foodScroll.on('scroll',({x,y})=>{
+            console.log(x,y);
+          })
+
         })
     });//ajax发送请求，这是异步获取数据
     //列表显示之后创建
