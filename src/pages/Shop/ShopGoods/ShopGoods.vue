@@ -67,6 +67,7 @@ export default {
         this.$nextTick(()=>{//列表数据更显显示后执行
             this._initScroll()
             this._initTops()
+            
         })
     });//ajax发送请求，这是异步获取数据
     //列表显示之后创建
@@ -77,7 +78,17 @@ export default {
 
     //计算得到当前分类的下标
     currentIndex(){
-
+        //得到条件数据
+        const {scrollY, tops} = this
+        //根据条件计算，产生一个结果(计算的是一个区间，遍历完每一个物品之后，保存了其clientHeigh
+        //而被监听的事件scrollY一直记录着当前的clientHeigh，用当所处位置所在区间去判断目前的index)
+        const index = tops.findIndex((top,index)=>{
+          //scrollY>=当前top && scrollY<下一个top
+          console.log(top)
+          return scrollY>=top && scrollY<tops[index+1]
+        })
+        //返回结果
+        return index
     }
   },
   methods: {//里面放事件回调函数相关的，因此为了区分开，init这两个方法加个_
@@ -92,7 +103,7 @@ export default {
 
       //给右侧列表绑定scroll监听,参数1为事件名，第2个回调函数
       foodScroll.on('scroll',({x,y})=>{
-        console.log(x,y);
+        //console.log(Math.abs(y));
         this.scrollY = Math.abs(y)
       })
     },
