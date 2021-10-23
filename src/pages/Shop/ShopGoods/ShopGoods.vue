@@ -84,7 +84,7 @@ export default {
         //而被监听的事件scrollY一直记录着当前的clientHeigh，用当所处位置所在区间去判断目前的index)
         const index = tops.findIndex((top,index)=>{
           //scrollY>=当前top && scrollY<下一个top
-          console.log(top)
+          //console.log(top)
           return scrollY>=top && scrollY<tops[index+1]
         })
         //返回结果
@@ -106,6 +106,12 @@ export default {
         //console.log(Math.abs(y));
         this.scrollY = Math.abs(y)
       })
+
+      //给右侧列表绑定scroll结束的监听
+      foodScroll.on('scrollEnd',({x,y})=>{
+        console.log("监听启动",x,y)
+        this.scrollY=Math.abs(y)
+      })
     },
     _initTops(){
       //1.初始化tops
@@ -123,7 +129,7 @@ export default {
       //3.更新数据
       this.tops = tops
 
-      console.log(tops)
+      //console.log(tops)
     }
   },
 }
