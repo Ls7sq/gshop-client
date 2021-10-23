@@ -35,7 +35,7 @@
                     <span class="old" v-if="food.oldPrice">￥{{food.oldPrice}}</span>
                   </div>
                   <div class="cartcontrol-wrapper">
-                    <!-- <CartControl :food="food"/> -->
+                    <CartControl :food="food"/>
                   </div>
                 </div>
               </li>
@@ -52,7 +52,7 @@
 <script>
 import BScroll from 'better-scroll'
 import {mapState} from 'vuex'
-
+import CartControl from '../../../components/CartControl/CartControl.vue'
 
 export default {
   data() {
@@ -144,6 +144,9 @@ export default {
       this.foodScroll.scrollTo(0,-y,700)
     }
   },
+  components:{
+    CartControl
+  }
 }
 </script>
 

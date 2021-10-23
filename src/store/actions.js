@@ -9,7 +9,9 @@ import {
     RESET_USER_INFO,
     RECEIVE_INFO,
     RECEIVE_RATINGS,
-    RECEIVE_GOODS
+    RECEIVE_GOODS,
+    INCREMENT_FOOD_COUNT,
+    DECREMENT_FOOD_COUNT
 } from './mutation-types'
 
 import {
@@ -107,7 +109,17 @@ export default{
         //此时数据已经更新了,通知组件
         callback && callback()
         }
+    },
+    //同步action，更新food中的count数量
+    updateFoodCount({commit},{isAdd,food}){
+        if (isAdd) {
+            commit(INCREMENT_FOOD_COUNT,{food})
+        }else{
+            commit(DECREMENT_FOOD_COUNT,{food})
+        }
     }
+
+
     // action中第一个参数是context
     // context的对象包含以下属性:
     // {
