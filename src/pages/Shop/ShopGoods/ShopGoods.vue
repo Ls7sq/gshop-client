@@ -95,21 +95,24 @@ export default {
     //初始化滚动条
     _initScroll(){
       //列表显示之后创建
-      new BScroll('.menu-wrapper')
+      new BScroll('.menu-wrapper',{
+          click: true
+      })
 
-      const foodScroll = new BScroll('.foods-wrapper',{
-          probeType:2 //2:因为惯性滑动不会触发
+      this.foodScroll = new BScroll('.foods-wrapper',{
+          probeType:2, //2:因为惯性滑动不会触发
+          click: true
       })
 
       //给右侧列表绑定scroll监听,参数1为事件名，第2个回调函数
-      foodScroll.on('scroll',({x,y})=>{
+      this.foodScroll.on('scroll',({x,y})=>{
         //console.log(Math.abs(y));
         this.scrollY = Math.abs(y)
       })
 
       //给右侧列表绑定scroll结束的监听
-      foodScroll.on('scrollEnd',({x,y})=>{
-        console.log("监听启动",x,y)
+      this.foodScroll.on('scrollEnd',({x,y})=>{
+        console.log("监听启动",y)
         this.scrollY=Math.abs(y)
       })
     },
@@ -130,6 +133,15 @@ export default {
       this.tops = tops
 
       //console.log(tops)
+    },
+    clickMenuItem(index){
+      //使右侧列表滑动到对应的位置
+      //先得到目标位置的scrollY
+      const y = this.tops[index]
+      //立即更新scrollY（目的是为了马上让点击分类反映出来）
+      this.scrollY = y
+      //平混滚动右侧列表
+      this.foodScroll.scrollTo(0,-y,700)
     }
   },
 }
