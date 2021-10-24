@@ -48,7 +48,25 @@ import {mapState, mapGetters} from 'vuex'
 export default {
     computed:{
         ...mapState(['cartFood','info']),
-        ...mapGetters(['totalCount','totalPrice'])
+        ...mapGetters(['totalCount','totalPrice']),
+        payText(){
+          //先取出需要的数据
+          const{totalPrice} = this
+          const{minPrice} = this.info
+
+          return totalPrice>=minPrice?'enough':'not-enough'
+        },
+        payClass(){
+          const{totalPrice} = this
+          const{minPrice} = this.info
+          if(totalPrice==0){
+            return `¥${minPrice}起送`
+          }else if(totalPrice<minPrice){
+            return `还差¥${minPrice-totalPrice}起送`
+          }else{
+            return '结算'
+          }
+        }
     }
 
 }
