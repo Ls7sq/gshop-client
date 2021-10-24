@@ -45,29 +45,58 @@
 
 <script>
 import {mapState, mapGetters} from 'vuex'
+import CartControl from '../CartControl/CartControl.vue'
 export default {
-    computed:{
-        ...mapState(['cartFood','info']),
-        ...mapGetters(['totalCount','totalPrice']),
-        payText(){
-          //先取出需要的数据
-          const{totalPrice} = this
-          const{minPrice} = this.info
-
-          return totalPrice>=minPrice?'enough':'not-enough'
-        },
-        payClass(){
-          const{totalPrice} = this
-          const{minPrice} = this.info
-          if(totalPrice==0){
-            return `¥${minPrice}起送`
-          }else if(totalPrice<minPrice){
-            return `还差¥${minPrice-totalPrice}起送`
-          }else{
-            return '结算'
-          }
-        }
+  data() {
+    return {
+      isShow:false
     }
+  },
+  computed:{
+      ...mapState(['cartFoods','info']),
+      ...mapGetters(['totalCount','totalPrice']),
+      payClass(){
+        //先取出需要的数据
+        const{totalPrice} = this
+        const{minPrice} = this.info
+
+        return totalPrice>=minPrice? 'enough' : 'not-enough'
+      },
+      payText(){
+        const{totalPrice} = this
+        const{minPrice} = this.info
+        if(totalPrice==0){
+          return `¥ ${minPrice} 起送`
+        }else if(totalPrice<minPrice){
+          return `还差 ¥ ${minPrice-totalPrice} 起送`
+        }else{
+          return '结算'
+        }
+      },
+      listShow(){
+        //如果总数量为0，直接不显示
+        if(this.totalCount===0){
+          this.isShow = false
+          return false
+        }
+
+        return this.isShow
+      }
+  },
+  components:{
+    CartControl
+  },
+  methods: {
+    toggleShow(){
+      //只有当总数量大于0时，才切换
+      if(this.totalCount>0){
+        this.listShow = !this.listShow
+      }
+    },
+    clearCart(){
+
+    },
+  },
 
 }
 </script>
