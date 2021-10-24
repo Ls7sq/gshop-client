@@ -46,7 +46,7 @@
       </div>
 
       <div class="rating-wrapper">
-        <ul>
+        <ul ref="picsUl">
           <li class="rating-item" v-for="(rating, index) in filterRatings" :key="index">
             <div class="avatar">
               <img width="28" height="28" :src="rating.avatar">
@@ -117,7 +117,11 @@ export default {
         return (selectType === 2 || selectType === rateType) && (!onlyShowText || text.length>0)
       })
     },
-
+  },
+  watch:{
+    filterRatings(){
+      console.log(this.filterRatings.length)
+    }
   },
   methods: {
     setSelectType(selectType){
