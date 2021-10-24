@@ -45,7 +45,7 @@
       </div>
       <!-- <ShopCart /> -->
     </div>
-    <!-- <Food :food="food" ref="food"/> -->
+    <Food :food="food" ref="food"/>
   </div>
 </template>
 
@@ -53,13 +53,14 @@
 import BScroll from 'better-scroll'
 import {mapState} from 'vuex'
 import CartControl from '../../../components/CartControl/CartControl.vue'
+import Food from '../../../components/Food/Food.vue'
 
 export default {
   data() {
     return {
       scrollY:0,
       tops:[],
-      // food:{}
+      food:{},//需要显示的food
     }
   },
   mounted() {
@@ -142,10 +143,18 @@ export default {
       this.scrollY = y
       //平混滚动右侧列表
       this.foodScroll.scrollTo(0,-y,700)
+    },
+    //显示点击的food
+    showFood(food){
+      //设置food
+      this.food = food
+      //显示food组件(父组件调用子组件对象的方法)
+      this.$refs.food.toggleShow()
     }
   },
   components:{
-    CartControl
+    CartControl,
+    Food
   }
 }
 </script>
