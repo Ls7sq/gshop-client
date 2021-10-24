@@ -7,6 +7,7 @@ import store from './store'
 import {Button} from 'mint-ui'
 import VueLazyload from 'vue-lazyload'
 
+import './filters/index'//加载过滤器即可
 import './mock/mockServer' //加载mockServer即可
 import loading from './common/imgs/loading.gif'
 
