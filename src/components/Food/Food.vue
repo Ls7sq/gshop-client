@@ -1,4 +1,5 @@
 <template>
+<transition name="fade">
   <div class="food" v-if="isShow">
     <div class="food-content">
       <div class="image-header">
@@ -25,9 +26,11 @@
     </div>
     <div class="food-cover" @click="toggleShow"></div>
   </div>
+</transition>
 </template>
 
 <script>
+import CartControl from '../CartControl/CartControl.vue'
 export default {
     props:{
         food:Object
@@ -42,6 +45,9 @@ export default {
             this.isShow = !this.isShow
         }
     },
+    components:{
+        CartControl
+    }
 }
 </script>
 

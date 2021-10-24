@@ -1,5 +1,6 @@
 <template>
   <div>
+    <transition name="fade">
     <div class="goods">
       <div class="menu-wrapper">
         <ul>
@@ -45,7 +46,10 @@
       </div>
       <!-- <ShopCart /> -->
     </div>
-    <Food :food="food" ref="food"/>
+    </transition>
+    <transition name="fade">
+      <Food :food="food" ref="food"/>
+    </transition>
   </div>
 </template>
 
@@ -169,6 +173,10 @@ export default {
     width: 100%
     background: #fff;
     overflow: hidden
+    &.fade-enter-active,&.fade-leave-active
+      transition opacity .5s
+    &.fade-enter,&.fade-leave-to
+      opacity 0
     .menu-wrapper
       flex: 0 0 80px
       width: 80px
