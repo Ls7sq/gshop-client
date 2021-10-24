@@ -12,7 +12,8 @@ import {
     RECEIVE_RATINGS,
     RECEIVE_GOODS,
     INCREMENT_FOOD_COUNT,
-    DECREMENT_FOOD_COUNT
+    DECREMENT_FOOD_COUNT,
+    CLEAR_CART
 } from './mutation-types'
 
 export default{
@@ -64,4 +65,13 @@ export default{
             }
         }   
     },
+    [CLEAR_CART](state){
+
+        //清除food中的count
+        state.cartFoods.forEach(element => {
+            
+        });(food=>food.count=0)
+        //清除购物车所有购物项
+        state.cartFoods = []
+    }
 }

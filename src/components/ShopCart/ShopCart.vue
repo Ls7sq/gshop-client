@@ -44,6 +44,7 @@
 </template>
 
 <script>
+import {MessageBox} from 'mint-ui'
 import BScroll from 'better-scroll'
 import {mapState, mapGetters} from 'vuex'
 import CartControl from '../CartControl/CartControl.vue'
@@ -106,7 +107,10 @@ export default {
       }
     },
     clearCart(){
-
+      MessageBox.confirm("确定要清空吗？")
+                .then(action=>{
+                  this.$store.dispatch('clearCart')
+                },()=>{})
     },
   },
 
