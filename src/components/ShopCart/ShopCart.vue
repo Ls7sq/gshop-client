@@ -90,7 +90,7 @@ export default {
     toggleShow(){
       //只有当总数量大于0时，才切换
       if(this.totalCount>0){
-        this.listShow = !this.listShow
+        this.isShow = !this.isShow
       }
     },
     clearCart(){
