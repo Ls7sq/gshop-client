@@ -102,6 +102,7 @@ export default {
 
       //操作过滤，产生一个过滤新数组
       return ratings.filter(rating=>{
+        const{rateType, text} = rating
         /*
           条件1:
             selectType : 0/1/2
@@ -112,7 +113,7 @@ export default {
             text: null/non-null
             !onlyShowText || text.length>0
          */
-        const{rateType, text} = rating
+        
         return (selectType === 2 || selectType === rateType) && (!onlyShowText || text.length>0)
       })
     },
